@@ -1,11 +1,17 @@
 import React from "react";
-import "./styles.css";
+import { Switch, Route } from "react-router-dom";
+import LogIn from "./components/auth/LogIn";
+import SignUp from "./components/auth/SignUp";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 export default function App() {
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+    <div>
+      <Switch>
+        <Route path="/login" component={LogIn} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/" component={Dashboard} />
+      </Switch>
     </div>
   );
 }
