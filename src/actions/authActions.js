@@ -1,6 +1,8 @@
 export const signIn = (creds) => {
   return (dispatch, getState, { getFirebase }) => {
-    getFirebase()
+    const firebase = getFirebase();
+
+    firebase
       .auth()
       .signInWithEmailAndPassword(creds.email, creds.password)
       .then(() => {
@@ -14,9 +16,11 @@ export const signIn = (creds) => {
 
 export const signUp = (creds) => {
   return (dispatch, getState, { getFirebase }) => {
-    getFirebase()
+    const firebase = getFirebase();
+
+    firebase
       .auth()
-      .createUserInWithEmailAndPassword(creds.email, creds.password)
+      .createUserWithEmailAndPassword(creds.email, creds.password)
       .then(() => {
         dispatch({ type: "SIGN_IN" });
       })
