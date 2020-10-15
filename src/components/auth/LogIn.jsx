@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,6 +11,9 @@ import Container from "@material-ui/core/Container";
 import styles from "./styles";
 
 const LogIn = ({ classes }) => {
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -18,21 +21,19 @@ const LogIn = ({ classes }) => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={(e) => e.preventDefault()}
-        >
+        <form className={classes.form} onSubmit={(e) => e.preventDefault()}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
             id="email"
+            type="email"
             label="Email Address"
             name="email"
             autoComplete="email"
-            autoFocus
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -44,6 +45,8 @@ const LogIn = ({ classes }) => {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
           <Button
             type="submit"

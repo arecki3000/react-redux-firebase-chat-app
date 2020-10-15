@@ -42,7 +42,6 @@ const SignUp = ({ classes }) => {
                 fullWidth
                 id="nick"
                 label="Nickname"
-                autoFocus
                 value={nick}
                 onChange={(e) => setNick(e.target.value)}
               />
