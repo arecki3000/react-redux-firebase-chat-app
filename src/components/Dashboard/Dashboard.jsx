@@ -1,7 +1,17 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { Paper } from "@material-ui/core";
+import Container from "@material-ui/core/Container";
+import styles from "./styles";
 
-const Dashboard = () => {
-  return <div>Dashboard</div>;
+const Dashboard = ({ classes }) => {
+  return (
+    <Container component="main" maxWidth="md">
+      <CssBaseline />
+      <Paper className={classes.root} />
+    </Container>
+  );
 };
 
-export default Dashboard;
+export default withStyles(styles)(Dashboard);
