@@ -7,9 +7,6 @@ import Container from "@material-ui/core/Container";
 import styles from "./styles";
 
 const Dashboard = ({ classes, uid }) => {
-  if (!uid) {
-    return <Redirect to="/login" />;
-  }
   return (
     <Container component="main" maxWidth="md">
       <CssBaseline />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -24,7 +24,7 @@ const LogIn = ({ classes, signIn, uid }) => {
   };
 
   if (uid) {
-    console.log("success");
+    return <Redirect to="/" />;
   }
 
   return (

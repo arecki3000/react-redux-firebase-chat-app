@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import styles from "./styles";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 import { signUp } from "../../actions/authActions";
 import { connect } from "react-redux";
 
@@ -28,7 +28,7 @@ const SignUp = ({ classes, signUp, uid }) => {
   };
 
   if (uid) {
-    console.log("success");
+    return <Redirect to="/" />;
   }
   return (
     <Container component="main" maxWidth="xs">
