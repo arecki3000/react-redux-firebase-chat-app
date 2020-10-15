@@ -13,7 +13,17 @@ import { Link as RouterLink } from "react-router-dom";
 
 const SignUp = ({ classes }) => {
   const [nick, setNick] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordsError, setPasswordsError] = useState(false);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      return setPasswordsError(true);
+    }
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -21,16 +31,16 @@ const SignUp = ({ classes }) => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} onSubmit={(e) => e.preventDefault()}>
+        <form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
                 autoComplete="nick"
-                name="firstName"
+                name="nick"
                 variant="outlined"
                 required
                 fullWidth
-                id="firstName"
+                id="nick"
                 label="Nickname"
                 autoFocus
                 value={nick}
@@ -47,6 +57,8 @@ const SignUp = ({ classes }) => {
                 name="email"
                 autoComplete="email"
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -59,6 +71,9 @@ const SignUp = ({ classes }) => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                error={passwordsError}
               />
             </Grid>
             <Grid item xs={12}>
@@ -66,11 +81,14 @@ const SignUp = ({ classes }) => {
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
+                name="confirmPassword"
                 label="Confirm password"
                 type="password"
                 id="confirm-password"
                 autoComplete="confirm-password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                error={passwordsError}
               />
             </Grid>
           </Grid>
