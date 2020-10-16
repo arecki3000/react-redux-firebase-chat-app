@@ -6,6 +6,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import styles from "./styles";
 import List from "@material-ui/core/List";
 import MessageInput from "./MessageInput";
+import Message from "./Message";
 
 const ChatBox = ({ classes }) => {
   return (
@@ -16,7 +17,10 @@ const ChatBox = ({ classes }) => {
         </IconButton>
         <Typography>Andrzej Karot</Typography>
       </div>
-      <List className={classes.messagesBox}></List>
+      <List className={classes.list}>
+        <Message />
+        <Message my />
+      </List>
       <MessageInput />
     </div>
   );
