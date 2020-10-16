@@ -17,14 +17,14 @@ const Message = ({ classes, my }) => {
           <Typography
             style={{ fontSize: "0.8rem" }}
             color="textSecondary"
-            variant="div"
+            variant="body2"
           >
             Andrzj Karot
           </Typography>
           <Typography
             className={my ? classes.textMy : classes.text}
             display="block"
-            variant="div"
+            variant="body1"
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
             ipsa ratione eos? Corrupti aspernatur perferendis perspiciatis
