@@ -5,7 +5,7 @@ const styles = (theme) => ({
     display: "none",
     borderRight: `1px solid ${theme.palette.divider}`,
     [theme.breakpoints.up("tablet")]: {
-      width: "300px",
+      width: "400px",
       display: "block"
     }
   },
