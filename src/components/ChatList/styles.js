@@ -2,9 +2,11 @@ const styles = (theme) => ({
   root: {
     height: "100%",
     width: "100%",
+    display: "none",
     borderRight: `1px solid ${theme.palette.divider}`,
     [theme.breakpoints.up("tablet")]: {
-      width: "300px"
+      width: "300px",
+      display: "block"
     }
   },
   filter: {
@@ -16,14 +18,19 @@ const styles = (theme) => ({
     padding: theme.spacing(2, 2)
   },
   inputContainer: {
+    opacity: "0.7",
     width: "100%",
     background: theme.palette.grey[200],
     borderRadius: "10px",
-    padding: theme.spacing(1)
+    padding: theme.spacing(1),
+    "&:hover": {
+      opacity: "1"
+    }
   },
   list: {
     height: "calc(100% - 140px)",
-    width: "100%"
+    width: "100%",
+    overflow: "auto"
   },
   button: {
     width: "100%",

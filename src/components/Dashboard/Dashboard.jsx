@@ -4,6 +4,7 @@ import Container from "@material-ui/core/Container";
 import styles from "./styles";
 import Typography from "@material-ui/core/Typography";
 import ChatList from "../ChatList/ChatList";
+import ChatBox from "../ChatBox/ChatBox";
 
 const Dashboard = ({ classes }) => {
   // const handleClick = (e) => {
@@ -12,12 +13,9 @@ const Dashboard = ({ classes }) => {
   // const chats = ["arek", "marek", "korda", "damian", "michal"];
   return (
     <Container component="main" maxWidth="lg">
-      <Typography
-        className={classes.root}
-        component="div"
-        style={{ height: "100vh" }}
-      >
+      <Typography className={classes.root} component="div">
         <ChatList />
+        <ChatBox />
       </Typography>
     </Container>
   );
