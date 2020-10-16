@@ -8,11 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import styles from "./styles";
-import { Link as RouterLink, Redirect } from "react-router-dom";
-import { signUp } from "../../actions/authActions";
-import { connect } from "react-redux";
+import { Link as RouterLink } from "react-router-dom";
 
-const SignUp = ({ classes, signUp, uid }) => {
+const SignUp = ({ classes }) => {
   const [nick, setNick] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,12 +22,8 @@ const SignUp = ({ classes, signUp, uid }) => {
     if (password !== confirmPassword) {
       return setPasswordsError(true);
     }
-    signUp({ email, password });
   };
 
-  if (uid) {
-    return <Redirect to="/" />;
-  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -119,18 +113,4 @@ const SignUp = ({ classes, signUp, uid }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const uid = state.firebase.auth.uid;
-  return { uid };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signUp: (creds) => dispatch(signUp(creds))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(SignUp));
+export default withStyles(styles)(SignUp);
