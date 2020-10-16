@@ -11,7 +11,7 @@ const ChatFilter = ({ classes }) => {
       <InputBase
         placeholder="Search..."
         startAdornment={
-          <InputAdornment position="start">
+          <InputAdornment position="end">
             <SearchIcon color="action" fontSize="small" />
           </InputAdornment>
         }

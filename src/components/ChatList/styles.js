@@ -36,8 +36,7 @@ const styles = (theme) => ({
     width: "100%",
     height: "70px",
     borderRadius: "0"
-  },
-  listItem: {}
+  }
 });
 
 export default styles;
