@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
-import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -15,7 +15,10 @@ import firebase from "./config/firebaseConfig";
 
 const theme = createMuiTheme(style);
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk.withExtraArgument({ getFirebase }))
+);
 
 const rrfProps = {
   firebase,
