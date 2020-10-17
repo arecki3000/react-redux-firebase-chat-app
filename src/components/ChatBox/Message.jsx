@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 
-const Message = ({ classes, my }) => {
+const Message = ({ classes, my, data, msg }) => {
   return (
     <ListItem
       className={my ? classes.messageContainerMy : classes.messageContainer}
@@ -19,16 +19,14 @@ const Message = ({ classes, my }) => {
             color="textSecondary"
             variant="body2"
           >
-            Andrzj Karot
+            {msg.authorId}
           </Typography>
           <Typography
             className={my ? classes.textMy : classes.text}
             display="block"
             variant="body1"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente
-            ipsa ratione eos? Corrupti aspernatur perferendis perspiciatis
-            cumque velit praesentium similique?
+            msg.data
           </Typography>
         </CardContent>
       </Card>

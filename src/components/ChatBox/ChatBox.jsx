@@ -11,9 +11,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-const ChatBox = ({ classes, messages }) => {
-  console.log("msg", messages);
-
+const ChatBox = ({ classes, messages, uid }) => {
   return (
     <div className={classes.root}>
       <div className={classes.friendInfo}>
@@ -23,8 +21,10 @@ const ChatBox = ({ classes, messages }) => {
         <Typography>Andrzej Karot</Typography>
       </div>
       <List className={classes.list}>
-        <Message />
-        <Message my />
+        {messages &&
+          messages.map((msg) => (
+            <Message my={uid === msg.authorId} msg={msg} />
+          ))}
       </List>
       <MessageInput />
     </div>
@@ -33,14 +33,21 @@ const ChatBox = ({ classes, messages }) => {
 
 const mapStateToProps = (state) => {
   const messages = state.firestore.ordered.msg;
+  const uid = state.firebase.auth.uid;
 
   return {
-    messages
+    messages,
+    uid
   };
 };
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect(() => ["msg"]),
+  firestoreConnect(() => [
+    {
+      collection: "msg",
+      orderBy: ["date", "asc"]
+    }
+  ]),
   withStyles(styles)
 )(ChatBox);
