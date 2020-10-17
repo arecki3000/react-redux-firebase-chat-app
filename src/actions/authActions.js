@@ -25,7 +25,7 @@ export const signIn = (credentials) => {
 
 export const signUp = (credentials) => {
   return (dispatch, getState, { getFirebase }) => {
-    const firebase = getFirebase;
+    const firebase = getFirebase();
 
     firebase
       .auth()
@@ -41,7 +41,7 @@ export const signUp = (credentials) => {
 
 export const signOut = () => {
   return (dispatch, getState, { getFirebase }) => {
-    const firebase = getFirebase;
+    const firebase = getFirebase();
 
     firebase
       .auth()

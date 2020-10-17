@@ -4,10 +4,13 @@ import styles from "./styles";
 import List from "@material-ui/core/List";
 import Button from "@material-ui/core/Button";
 import ChatFilter from "./ChatFilter";
-
 import Chat from "./Chat";
+import { signOut } from "../../actions/authActions";
+import { connect } from "react-redux";
+import { compose } from "redux";
+// import { Redirect } from "react-redux";
 
-const ChatList = ({ classes }) => {
+const ChatList = ({ classes, signOut }) => {
   const chats = [
     {
       author: "Andrzej Karot",
@@ -20,6 +23,13 @@ const ChatList = ({ classes }) => {
       msg: "— Ziobro, przestań mi rodzinę prześladować…"
     }
   ];
+
+  // console.log("state", state);
+
+  // if (uid) {
+  //   return <Redirect to="/" />;
+  // }
+
   return (
     <div className={classes.root}>
       <ChatFilter />
@@ -30,6 +40,7 @@ const ChatList = ({ classes }) => {
         })}
       </List>
       <Button
+        onClick={signOut}
         className={classes.button}
         variant="contained"
         color="secondary"
@@ -41,4 +52,13 @@ const ChatList = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(ChatList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut())
+  };
+};
+
+export default compose(
+  connect(null, mapDispatchToProps),
+  withStyles(styles)
+)(ChatList);

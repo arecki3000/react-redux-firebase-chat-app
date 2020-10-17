@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Redirect } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
@@ -8,17 +8,23 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import styles from "./styles";
+import { signIn } from "../../actions/authActions";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
-const LogIn = ({ classes }) => {
+const LogIn = ({ classes, signIn, uid }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    signIn({ email, password });
     setEmail("");
     setPassword("");
   };
-
+  if (uid) {
+    return <Redirect to="/" />;
+  }
   return (
     <Container component="main" maxWidth="xs">
       <div className={classes.paper}>
@@ -74,4 +80,20 @@ const LogIn = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(LogIn);
+const mapStateToProps = (state) => {
+  const uid = state.firebase.auth.uid;
+  return {
+    uid
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (user) => dispatch(signIn(user))
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles)
+)(LogIn);

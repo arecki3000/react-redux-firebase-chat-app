@@ -14,18 +14,23 @@ export const authReducer = (state = {}, action) => {
       return state;
     }
     case SIGN_IN_ERROR: {
+      console.log("sign in error");
       return state;
     }
     case SIGN_UP: {
+      console.log("sign up success");
       return state;
     }
     case SIGN_UP_ERROR: {
+      console.log("sign up error");
       return state;
     }
     case SIGN_OUT: {
+      console.log("sign out success");
       return state;
     }
     case SIGN_OUT_ERROR: {
+      console.log("sign ut error");
       return state;
     }
     default:

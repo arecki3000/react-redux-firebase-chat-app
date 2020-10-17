@@ -7,8 +7,13 @@ import styles from "./styles";
 import List from "@material-ui/core/List";
 import MessageInput from "./MessageInput";
 import Message from "./Message";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
 
-const ChatBox = ({ classes }) => {
+const ChatBox = ({ classes, messages }) => {
+  console.log("msg", messages);
+
   return (
     <div className={classes.root}>
       <div className={classes.friendInfo}>
@@ -26,4 +31,16 @@ const ChatBox = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(ChatBox);
+const mapStateToProps = (state) => {
+  const messages = state.firestore.ordered.msg;
+
+  return {
+    messages
+  };
+};
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect(() => ["msg"]),
+  withStyles(styles)
+)(ChatBox);

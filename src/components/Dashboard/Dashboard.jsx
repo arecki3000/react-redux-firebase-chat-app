@@ -5,12 +5,15 @@ import styles from "./styles";
 import Typography from "@material-ui/core/Typography";
 import ChatList from "../ChatList/ChatList";
 import ChatBox from "../ChatBox/ChatBox";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
-const Dashboard = ({ classes }) => {
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  // };
-  // const chats = ["arek", "marek", "korda", "damian", "michal"];
+const Dashboard = ({ classes, uid }) => {
+  if (!uid) {
+    return <Redirect to="/login" />;
+  }
+
   return (
     <Container component="main" maxWidth="lg">
       <Typography className={classes.root} component="div">
@@ -21,4 +24,12 @@ const Dashboard = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(Dashboard);
+const mapStateToProps = (state) => {
+  const uid = state.firebase.auth.uid;
+
+  return {
+    uid
+  };
+};
+
+export default compose(connect(mapStateToProps), withStyles(styles))(Dashboard);
