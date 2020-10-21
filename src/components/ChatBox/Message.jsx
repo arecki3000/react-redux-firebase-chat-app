@@ -6,6 +6,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import moment from "moment";
 
 const Message = ({ classes, my, data, msg }) => {
   return (
@@ -26,7 +27,7 @@ const Message = ({ classes, my, data, msg }) => {
             display="block"
             variant="body1"
           >
-            {msg.data}
+            {data}
           </Typography>
         </CardContent>
       </Card>
