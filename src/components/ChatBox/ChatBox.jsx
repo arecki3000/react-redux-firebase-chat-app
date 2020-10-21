@@ -42,7 +42,8 @@ const ChatBox = ({ classes, messages, uid }) => {
             <Message
               key={msg.id}
               my={uid === msg.authorId}
-              msg={msg}
+              time={msg.date}
+              author={msg.authorId}
               data={msg.data}
             />
           ))}

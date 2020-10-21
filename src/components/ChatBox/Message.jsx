@@ -8,7 +8,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import moment from "moment";
 
-const Message = ({ classes, my, data, msg }) => {
+const Message = ({ classes, my, data, author, time }) => {
   return (
     <ListItem
       className={my ? classes.messageContainerMy : classes.messageContainer}
@@ -20,7 +20,7 @@ const Message = ({ classes, my, data, msg }) => {
             color="textSecondary"
             variant="body2"
           >
-            {msg.authorId}
+            {author}
           </Typography>
           <Typography
             className={my ? classes.textMy : classes.text}
@@ -31,7 +31,7 @@ const Message = ({ classes, my, data, msg }) => {
           </Typography>
         </CardContent>
       </Card>
-      <ListItemText secondary="10:25" />
+      <ListItemText secondary={moment(time.toDate()).calendar()} />
     </ListItem>
   );
 };
