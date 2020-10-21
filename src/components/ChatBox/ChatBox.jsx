@@ -12,19 +12,19 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 const ChatBox = ({ classes, messages, uid }) => {
-  const dummyRef = useRef();
+  const dummyRef = useRef(null);
+  const firstLoad = useRef(true);
 
   useEffect(() => {
-    if (dummyRef.current) {
-      dummyRef.current.scrollIntoView();
-    }
-  }, []);
-
-  useEffect(() => {
-    if (dummyRef.current) {
-      dummyRef.current.scrollIntoView({
-        behavior: "smooth"
-      });
+    if (dummyRef.current && messages) {
+      if (firstLoad.current) {
+        dummyRef.current.scrollIntoView();
+        firstLoad.current = false;
+      } else {
+        dummyRef.current.scrollIntoView({
+          behavior: "smooth"
+        });
+      }
     }
   }, [messages]);
 
