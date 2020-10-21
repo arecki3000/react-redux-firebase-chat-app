@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -12,9 +12,22 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 const ChatBox = ({ classes, messages, uid }) => {
-  // const scrollToBottom = () => {
-  //   return;
-  // };
+  const [firstLoad, setFirstLoad] = useState(true);
+  const dummyRef = useRef(null);
+
+  useEffect(() => {
+    if (dummyRef.current) {
+      console.log(firstLoad);
+      if (firstLoad) {
+        dummyRef.current.scrollIntoView();
+        setFirstLoad(false);
+      } else {
+        dummyRef.current.scrollIntoView({
+          behavior: "smooth"
+        });
+      }
+    }
+  }, [messages]);
 
   return (
     <div className={classes.root}>
@@ -29,7 +42,7 @@ const ChatBox = ({ classes, messages, uid }) => {
           messages.map((msg) => (
             <Message my={uid === msg.authorId} msg={msg} />
           ))}
-        <div className="dummy"></div>
+        <div ref={dummyRef}></div>
       </List>
       <MessageInput />
     </div>
