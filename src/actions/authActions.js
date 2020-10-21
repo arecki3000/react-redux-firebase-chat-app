@@ -34,8 +34,7 @@ export const signUp = (newUser) => {
       .then((res) => {
         return firestore.collection("users").doc(res.user.uid).set({
           nick: newUser.nick,
-          emil: newUser.emil,
-          friends: {}
+          emil: newUser.emil
         });
       })
       .then(() => {
