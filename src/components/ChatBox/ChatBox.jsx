@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -12,6 +12,10 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 const ChatBox = ({ classes, messages, uid }) => {
+  // const scrollToBottom = () => {
+  //   return;
+  // };
+
   return (
     <div className={classes.root}>
       <div className={classes.friendInfo}>
@@ -25,6 +29,7 @@ const ChatBox = ({ classes, messages, uid }) => {
           messages.map((msg) => (
             <Message my={uid === msg.authorId} msg={msg} />
           ))}
+        <div className="dummy"></div>
       </List>
       <MessageInput />
     </div>

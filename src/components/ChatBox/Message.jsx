@@ -26,7 +26,7 @@ const Message = ({ classes, my, data, msg }) => {
             display="block"
             variant="body1"
           >
-            msg.data
+            {msg.data}
           </Typography>
         </CardContent>
       </Card>

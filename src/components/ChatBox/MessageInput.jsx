@@ -13,8 +13,8 @@ const MessageInput = ({ classes, sendMessage }) => {
     data: ""
   });
 
-  const handleMessage = () => {
-    console.log(text);
+  const handleMessage = (e) => {
+    e.preventDefault();
     sendMessage(text);
     setText((prevState) => {
       return { ...prevState, data: "" };
@@ -30,18 +30,17 @@ const MessageInput = ({ classes, sendMessage }) => {
   };
 
   return (
-    <div className={classes.messageInput}>
+    <form onSubmit={(e) => handleMessage(e)} className={classes.messageInput}>
       <InputBase
-        multiline
         placeholder="Type something..."
         className={classes.inputContainer}
         value={text.data}
         onChange={(e) => handleChange(e)}
       />
-      <IconButton onClick={() => handleMessage()} color="primary">
+      <IconButton type="submit" color="primary">
         <SendIcon />
       </IconButton>
-    </div>
+    </form>
   );
 };
 
