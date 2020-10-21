@@ -25,7 +25,7 @@ const SignUp = ({ classes, signUp, uid }) => {
       setPasswordsError(true);
       return;
     }
-    signUp({ email, password });
+    signUp({ email, password, nick });
   };
 
   if (uid) {

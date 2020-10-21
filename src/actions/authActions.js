@@ -7,13 +7,13 @@ import {
   SIGN_OUT_ERROR
 } from "../constants/actionConstants";
 
-export const signIn = (credentials) => {
+export const signIn = (user) => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
 
     firebase
       .auth()
-      .signInWithEmailAndPassword(credentials.email, credentials.password)
+      .signInWithEmailAndPassword(user.email, user.password)
       .then(() => {
         dispatch({ type: SIGN_IN });
       })
@@ -23,13 +23,21 @@ export const signIn = (credentials) => {
   };
 };
 
-export const signUp = (credentials) => {
+export const signUp = (newUser) => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
+    const firestore = getFirebase().firestore();
 
     firebase
       .auth()
-      .createUserWithEmailAndPassword(credentials.email, credentials.password)
+      .createUserWithEmailAndPassword(newUser.email, newUser.password)
+      .then((res) => {
+        return firestore.collection("users").doc(res.user.uid).set({
+          nick: newUser.nick,
+          emil: newUser.emil,
+          friends: {}
+        });
+      })
       .then(() => {
         dispatch({ type: SIGN_UP });
       })
