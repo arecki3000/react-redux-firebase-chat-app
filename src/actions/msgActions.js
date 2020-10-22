@@ -1,4 +1,8 @@
-import { ADD_MSG, ADD_MSG_ERROR } from "../constants/actionConstants";
+import {
+  ADD_MSG,
+  ADD_MSG_ERROR,
+  SET_CURRENT_CHAT
+} from "../constants/actionConstants";
 
 export const sendMessage = (message) => {
   return (dispatch, getState, { getFirebase }) => {
@@ -23,5 +27,12 @@ export const sendMessage = (message) => {
           error
         });
       });
+  };
+};
+
+export const setCurrentChat = (chatId) => {
+  return {
+    type: SET_CURRENT_CHAT,
+    chatId
   };
 };

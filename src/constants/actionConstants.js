@@ -6,3 +6,5 @@ export const SIGN_OUT = "SIGN_OUT";
 export const SIGN_OUT_ERROR = "SIGN_OUT_ERRORA";
 export const ADD_MSG = "ADD_MSG";
 export const ADD_MSG_ERROR = "ADD_MSG_ERROR";
+export const SET_CURRENT_CHAT = "SET_CURRENT_CHAT";
+export const SET_CURRENT_CHAT_ERROR = "SET_CURRENT_CHAT_ERROR";

@@ -5,13 +5,20 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import { setCurrentChat } from "../../actions/msgActions";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
-const Chat = ({ classes }) => {
+const Chat = ({ classes, user, chatId, setCurrentChat }) => {
   return (
     <React.Fragment>
-      <ListItem button alignItems="center">
+      <ListItem
+        button
+        onClick={() => setCurrentChat(chatId)}
+        alignItems="center"
+      >
         <ListItemText
-          primary="Andrzej Karrot"
+          primary={user}
           secondary={
             <React.Fragment>
               <Typography
@@ -20,9 +27,9 @@ const Chat = ({ classes }) => {
                 color="textSecondary"
                 display="block"
               >
-                10:25
+                {/* 10:25 */}
               </Typography>
-              {" — Ziobro, przestań mi rodzinę prześladować…"}
+              {/* {" — Ziobro, przestań mi rodzinę prześladować…"} */}
             </React.Fragment>
           }
         />
@@ -32,4 +39,13 @@ const Chat = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(Chat);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCurrentChat: (chatId) => dispatch(setCurrentChat(chatId))
+  };
+};
+
+export default compose(
+  connect(null, mapDispatchToProps),
+  withStyles(styles)
+)(Chat);

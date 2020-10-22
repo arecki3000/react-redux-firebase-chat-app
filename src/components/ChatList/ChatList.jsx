@@ -8,36 +8,17 @@ import Chat from "./Chat";
 import { signOut } from "../../actions/authActions";
 import { connect } from "react-redux";
 import { compose } from "redux";
-// import { Redirect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
 
-const ChatList = ({ classes, signOut }) => {
-  const chats = [
-    {
-      author: "Andrzej Karot",
-      time: "10:26",
-      msg: "— Ziobro, przestań mi rodzinę prześladować…"
-    },
-    {
-      author: "Andrzej Karot",
-      time: "10:26",
-      msg: "— Ziobro, przestań mi rodzinę prześladować…"
-    }
-  ];
-
-  // console.log("state", state);
-
-  // if (uid) {
-  //   return <Redirect to="/" />;
-  // }
-
+const ChatList = ({ classes, signOut, users, uid, state }) => {
   return (
     <div className={classes.root}>
       <ChatFilter />
-
       <List className={classes.list}>
-        {chats.map((chat, index) => {
-          return <Chat key={index} />;
-        })}
+        {users &&
+          users.map((user) => {
+            return <Chat chatId={user.id} key={uid} user={user.nick} />;
+          })}
       </List>
       <Button
         onClick={signOut}
@@ -52,6 +33,16 @@ const ChatList = ({ classes, signOut }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  const users = state.firestore.ordered.users;
+  const uid = state.firebase.auth.uid;
+
+  return {
+    users,
+    uid
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     signOut: () => dispatch(signOut())
@@ -59,6 +50,13 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default compose(
-  connect(null, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect((ownProps) => [
+    {
+      collection: "users",
+      // where: [["id", "==", ownProps.uid]],
+      orderBy: ["nick", "asc"]
+    }
+  ]),
   withStyles(styles)
 )(ChatList);

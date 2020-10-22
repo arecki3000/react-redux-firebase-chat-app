@@ -1,4 +1,8 @@
-import { ADD_MSG, ADD_MSG_ERROR } from "../constants/actionConstants";
+import {
+  ADD_MSG,
+  ADD_MSG_ERROR,
+  SET_CURRENT_CHAT
+} from "../constants/actionConstants";
 
 export const msgReducer = (state = {}, action) => {
   switch (action.type) {
@@ -9,6 +13,13 @@ export const msgReducer = (state = {}, action) => {
     case ADD_MSG_ERROR: {
       console.log("message error");
       return state;
+    }
+    case SET_CURRENT_CHAT: {
+      console.log("setting current chat");
+      return {
+        ...state,
+        chatId: action.chatId
+      };
     }
     default:
       return state;
