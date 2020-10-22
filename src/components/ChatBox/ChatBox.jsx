@@ -11,9 +11,11 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-const ChatBox = ({ classes, messages, uid }) => {
+const ChatBox = ({ classes, messages, uid, chatId, users }) => {
   const dummyRef = useRef(null);
   const firstLoad = useRef(true);
+
+  const chatName = users.filter((user) => user.id === chatId);
 
   useEffect(() => {
     if (dummyRef.current && messages) {
@@ -34,7 +36,7 @@ const ChatBox = ({ classes, messages, uid }) => {
         <IconButton className={classes.arrowBack}>
           <ArrowBackIcon />
         </IconButton>
-        <Typography>Andrzej Karot</Typography>
+        <Typography>{chatName ? chatName : ""}</Typography>
       </div>
       <List className={classes.list}>
         {messages &&
@@ -57,19 +59,28 @@ const ChatBox = ({ classes, messages, uid }) => {
 const mapStateToProps = (state) => {
   const messages = state.firestore.ordered.msg;
   const uid = state.firebase.auth.uid;
+  const chatId = state.msg.chatId;
+  const users = state.firestore.ordered.users;
 
   return {
+    chatId,
     messages,
-    uid
+    uid,
+    users
   };
 };
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect(() => [
+  firestoreConnect((ownProps) => [
     {
       collection: "msg",
       orderBy: ["date", "asc"]
+    },
+    {
+      collection: "users",
+      // doc: !ownProps.uid
+      where: ["id", "!=", ownProps.uid]
     }
   ]),
   withStyles(styles)
