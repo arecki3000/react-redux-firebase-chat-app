@@ -1,7 +1,7 @@
 import {
   ADD_MSG,
   ADD_MSG_ERROR,
-  GET_INTERLOCUTOR_ID,
+  SET_CURRENT_CHAT,
   CREATE_NEW_CHAT,
   CREATE_NEW_CHAT_ERROR
 } from "../constants/actionConstants";
@@ -32,10 +32,10 @@ export const sendMessage = (message) => {
   };
 };
 
-export const getInterlocutorId = (id) => {
+export const getInterlocutorId = (currentChatId) => {
   return {
-    type: GET_INTERLOCUTOR_ID,
-    id
+    type: SET_CURRENT_CHAT,
+    currentChatId
   };
 };
 

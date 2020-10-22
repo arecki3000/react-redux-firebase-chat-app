@@ -5,16 +5,16 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import { getInterlocutorId } from "../../actions/msgActions";
+import { setCurrentChat } from "../../actions/msgActions";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
-const Chat = ({ classes, user, chatId, setCurrentChat }) => {
+const Chat = ({ classes, user, interlocutorId, setCurrentChat }) => {
   return (
     <React.Fragment>
       <ListItem
         button
-        onClick={() => setCurrentChat(chatId)}
+        onClick={() => setCurrentChat(interlocutorId)}
         alignItems="center"
       >
         <ListItemText
@@ -41,7 +41,7 @@ const Chat = ({ classes, user, chatId, setCurrentChat }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getInterlocutorId: (chatId) => dispatch(getInterlocutorId(chatId))
+    setCurrentChat: (interlocutorId) => dispatch(setCurrentChat(interlocutorId))
   };
 };
 

@@ -54,7 +54,6 @@ export default compose(
   firestoreConnect((ownProps) => [
     {
       collection: "users",
-      // doc: !ownProps.uid
       where: ["id", "!=", ownProps.uid]
     }
   ]),
