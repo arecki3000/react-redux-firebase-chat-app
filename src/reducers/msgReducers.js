@@ -1,7 +1,7 @@
 import {
   ADD_MSG,
   ADD_MSG_ERROR,
-  SET_CURRENT_CHAT
+  GET_INTERLOCUTOR_ID
 } from "../constants/actionConstants";
 
 export const msgReducer = (state = {}, action) => {
@@ -14,11 +14,11 @@ export const msgReducer = (state = {}, action) => {
       console.log("message error");
       return state;
     }
-    case SET_CURRENT_CHAT: {
+    case GET_INTERLOCUTOR_ID: {
       console.log("setting current chat");
       return {
         ...state,
-        chatId: action.chatId
+        interlocutorId: action.chatId
       };
     }
     default:

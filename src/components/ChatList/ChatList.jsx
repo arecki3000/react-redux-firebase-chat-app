@@ -54,8 +54,8 @@ export default compose(
   firestoreConnect((ownProps) => [
     {
       collection: "users",
-      // where: [["id", "==", ownProps.uid]],
-      orderBy: ["nick", "asc"]
+      // doc: !ownProps.uid
+      where: ["id", "!=", ownProps.uid]
     }
   ]),
   withStyles(styles)

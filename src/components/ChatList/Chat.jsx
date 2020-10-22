@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import { setCurrentChat } from "../../actions/msgActions";
+import { getInterlocutorId } from "../../actions/msgActions";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
@@ -41,7 +41,7 @@ const Chat = ({ classes, user, chatId, setCurrentChat }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setCurrentChat: (chatId) => dispatch(setCurrentChat(chatId))
+    getInterlocutorId: (chatId) => dispatch(getInterlocutorId(chatId))
   };
 };
 
