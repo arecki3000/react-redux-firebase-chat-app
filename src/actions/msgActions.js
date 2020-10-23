@@ -10,6 +10,7 @@ export const sendMessage = (message) => {
   return (dispatch, getState, { getFirebase }) => {
     const firestore = getFirebase().firestore();
     const authorId = getState().firebase.auth.uid;
+
     firestore
       .collection("msg")
       .add({
@@ -19,8 +20,7 @@ export const sendMessage = (message) => {
       })
       .then(() => {
         dispatch({
-          type: ADD_MSG,
-          message
+          type: ADD_MSG
         });
       })
       .catch((error) => {
@@ -32,34 +32,30 @@ export const sendMessage = (message) => {
   };
 };
 
-export const getInterlocutorId = (currentChatId) => {
+export const setCurrentChat = (currentChatId) => {
   return {
     type: SET_CURRENT_CHAT,
     currentChatId
   };
 };
 
-export const createNewChat = (chatId, user1Id, user2Id) => {
+export const createNewChat = (newChat) => {
   return (dispatch, getState, { getFirebase }) => {
     const firestore = getFirebase().firestore();
+    console.log("new chat action");
 
     firestore
       .collection("chats")
-      .doc(chatId)
+      .doc(newChat.chatId)
       .set({
-        users: [user1Id, user2Id],
+        users: [newChat.uid, newChat.interlocutorId],
         lastMsg: ""
       })
       .then(() => {
-        dispatch({
-          type: CREATE_NEW_CHAT
-        });
+        dispatch({ type: CREATE_NEW_CHAT });
       })
       .catch((error) => {
-        dispatch({
-          type: CREATE_NEW_CHAT_ERROR,
-          error
-        });
+        dispatch({ type: CREATE_NEW_CHAT_ERROR, error });
       });
   };
 };

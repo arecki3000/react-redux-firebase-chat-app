@@ -1,7 +1,9 @@
 import {
   ADD_MSG,
   ADD_MSG_ERROR,
-  SET_CURRENT_CHAT
+  SET_CURRENT_CHAT,
+  CREATE_NEW_CHAT,
+  CREATE_NEW_CHAT_ERROR
 } from "../constants/actionConstants";
 
 export const msgReducer = (state = {}, action) => {
@@ -20,6 +22,14 @@ export const msgReducer = (state = {}, action) => {
         ...state,
         chatId: action.chatId
       };
+    }
+    case CREATE_NEW_CHAT: {
+      console.log("creating new chat");
+      return state;
+    }
+    case CREATE_NEW_CHAT_ERROR: {
+      console.log("new chat error");
+      return state;
     }
     default:
       return state;

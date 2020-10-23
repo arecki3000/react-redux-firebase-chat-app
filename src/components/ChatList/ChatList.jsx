@@ -17,7 +17,7 @@ const ChatList = ({ classes, signOut, users, uid, state }) => {
       <List className={classes.list}>
         {users &&
           users.map((user) => {
-            return <Chat chatId={user.id} key={uid} user={user.nick} />;
+            return <Chat interlocutorId={user.id} key={uid} user={user.nick} />;
           })}
       </List>
       <Button
