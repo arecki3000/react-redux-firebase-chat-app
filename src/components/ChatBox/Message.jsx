@@ -31,7 +31,7 @@ const Message = ({ classes, my, data, author, time }) => {
           </Typography>
         </CardContent>
       </Card>
-      <ListItemText secondary={moment(time.toDate()).calendar()} />
+      <ListItemText secondary={time ? moment(time.toDate()).calendar() : ""} />
     </ListItem>
   );
 };

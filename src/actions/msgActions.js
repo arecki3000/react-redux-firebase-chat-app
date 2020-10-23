@@ -12,9 +12,11 @@ export const sendMessage = (message) => {
     const authorId = getState().firebase.auth.uid;
 
     firestore
-      .collection("msg")
+      .collection("messages")
+      .doc(message.currentChatId)
+      .collection("message")
       .add({
-        ...message,
+        data: message.text.data,
         authorId: authorId,
         date: new Date()
       })

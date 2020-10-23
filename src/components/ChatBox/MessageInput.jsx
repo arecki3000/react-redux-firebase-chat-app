@@ -8,17 +8,21 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { sendMessage } from "../../actions/msgActions";
 
-const MessageInput = ({ classes, sendMessage }) => {
+const MessageInput = ({ classes, sendMessage, currentChatId }) => {
   const [text, setText] = useState({
     data: ""
   });
 
   const handleMessage = (e) => {
     e.preventDefault();
-    sendMessage(text);
-    setText((prevState) => {
-      return { ...prevState, data: "" };
-    });
+    if (currentChatId && text.data) {
+      sendMessage({ text, currentChatId });
+      setText((prevState) => {
+        return { ...prevState, data: "" };
+      });
+    } else {
+      return;
+    }
   };
 
   const handleChange = (e) => {

@@ -14,10 +14,12 @@ const Chat = ({
   classes,
   user,
   interlocutorId,
-  setCurrentChat,
+  currentChatId,
   uid,
   chats,
-  createNewChat
+  setCurrentChat,
+  createNewChat,
+  state
 }) => {
   const handleClick = (interlocutorId, uid) => {
     const chatId =
@@ -27,12 +29,16 @@ const Chat = ({
     const chat = chats.find((chat) => chat.id === chatId);
 
     if (chat) {
-      console.log("chat found");
+      if (currentChatId) return;
+      if (!currentChatId) {
+        setCurrentChat(chatId);
+      }
     } else {
       console.log("bla");
       createNewChat({ chatId, uid, interlocutorId });
+      setCurrentChat(chatId);
     }
-    console.log({ chatId, chats, chat });
+    console.log({ chatId, chats, chat, currentChatId });
   };
 
   return (
@@ -67,11 +73,13 @@ const Chat = ({
 const mapStateToProps = (state) => {
   const chats = state.firestore.ordered.chats;
   const uid = state.firebase.auth.uid;
+  const currentChatId = state.msg.currentChatId;
 
   return {
     state,
     uid,
-    chats
+    chats,
+    currentChatId
   };
 };
 
