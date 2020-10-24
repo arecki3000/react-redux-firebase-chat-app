@@ -20,9 +20,11 @@ export const msgReducer = (state = {}, action) => {
       console.log("setting current chat");
       return {
         ...state,
-        currentChatId: action.currentChatId
+        currentChatId: action.currentChatId,
+        interlocutorId: action.interlocutorId
       };
     }
+
     case CREATE_NEW_CHAT: {
       console.log("creating new chat");
       return state;

@@ -34,10 +34,11 @@ export const sendMessage = (message) => {
   };
 };
 
-export const setCurrentChat = (currentChatId) => {
+export const setCurrentChat = (currentChat) => {
   return {
     type: SET_CURRENT_CHAT,
-    currentChatId
+    currentChatId: currentChat.chatId,
+    interlocutorId: currentChat.interlocutorId
   };
 };
 

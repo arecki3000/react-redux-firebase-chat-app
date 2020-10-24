@@ -15,13 +15,19 @@ const MessageInput = ({ classes, sendMessage, currentChatId }) => {
 
   const handleMessage = (e) => {
     e.preventDefault();
-    if (currentChatId && text.data) {
+    if (
+      currentChatId &&
+      text.data &&
+      currentChatId !== "F7gkj6AC6tQkCaEWQ9So"
+    ) {
       sendMessage({ text, currentChatId });
       setText((prevState) => {
         return { ...prevState, data: "" };
       });
     } else {
-      return;
+      setText((prevState) => {
+        return { ...prevState, data: "" };
+      });
     }
   };
 

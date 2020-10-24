@@ -10,13 +10,15 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-const ChatList = ({ classes, signOut, users, uid, state }) => {
+const ChatList = ({ classes, signOut, users, uid }) => {
+  const userWithoutUser = users ? users.filter((user) => user.id !== uid) : [];
+
   return (
     <div className={classes.root}>
       <ChatFilter />
       <List className={classes.list}>
         {users &&
-          users.map((user) => {
+          userWithoutUser.map((user) => {
             return <Chat interlocutorId={user.id} key={uid} user={user.nick} />;
           })}
       </List>

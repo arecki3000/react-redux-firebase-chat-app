@@ -29,16 +29,11 @@ const Chat = ({
     const chat = chats.find((chat) => chat.id === chatId);
 
     if (chat) {
-      if (currentChatId) return;
-      if (!currentChatId) {
-        setCurrentChat(chatId);
-      }
+      setCurrentChat({ chatId, interlocutorId });
     } else {
-      console.log("bla");
       createNewChat({ chatId, uid, interlocutorId });
-      setCurrentChat(chatId);
+      setCurrentChat({ chatId, interlocutorId });
     }
-    console.log({ chatId, chats, chat, currentChatId });
   };
 
   return (
