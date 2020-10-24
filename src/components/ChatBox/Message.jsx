@@ -7,8 +7,14 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import moment from "moment";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
 
-const Message = ({ classes, my, data, author, time }) => {
+const Message = ({ classes, my, data, author, time, users }) => {
+  const user = users ? users.filter((user) => user.id === author) : "";
+  const nick = user && user.length > 0 ? user[0].nick : "";
+
   return (
     <ListItem
       className={my ? classes.messageContainerMy : classes.messageContainer}
@@ -20,7 +26,7 @@ const Message = ({ classes, my, data, author, time }) => {
             color="textSecondary"
             variant="body2"
           >
-            {author}
+            {nick}
           </Typography>
           <Typography
             className={my ? classes.textMy : classes.text}
@@ -36,4 +42,20 @@ const Message = ({ classes, my, data, author, time }) => {
   );
 };
 
-export default withStyles(styles)(Message);
+const mapStateToProps = (state) => {
+  const users = state.firestore.ordered.users;
+
+  return {
+    users
+  };
+};
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect(() => [
+    {
+      collection: "users"
+    }
+  ]),
+  withStyles(styles)
+)(Message);
