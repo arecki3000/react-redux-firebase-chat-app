@@ -28,9 +28,11 @@ const ChatList = ({ classes, signOut, users, uid, currentChatId }) => {
         handleFilter={(e) => setFilter(e.target.value)}
       />
       <List className={classes.list}>
-        {users &&
+        {usersToShow &&
           usersToShow.map((user) => {
-            return <Chat interlocutorId={user.id} key={uid} user={user.nick} />;
+            return (
+              <Chat interlocutorId={user.id} key={user.id} user={user.nick} />
+            );
           })}
       </List>
       <Button
