@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import List from "@material-ui/core/List";
@@ -11,14 +11,25 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
 const ChatList = ({ classes, signOut, users, uid }) => {
-  const userWithoutUser = users ? users.filter((user) => user.id !== uid) : [];
+  const userWithoutAuthUser = users
+    ? users.filter((user) => user.id !== uid)
+    : [];
+
+  const [filter, setFilter] = useState("");
+
+  const usersToShow = userWithoutAuthUser.filter((user) =>
+    user.nick.toLowerCase().includes(filter)
+  );
 
   return (
     <div className={classes.root}>
-      <ChatFilter />
+      <ChatFilter
+        filter={filter}
+        handleFilter={(e) => setFilter(e.target.value)}
+      />
       <List className={classes.list}>
         {users &&
-          userWithoutUser.map((user) => {
+          usersToShow.map((user) => {
             return <Chat interlocutorId={user.id} key={uid} user={user.nick} />;
           })}
       </List>
