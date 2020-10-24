@@ -22,12 +22,6 @@ const Chat = ({
   state
 }) => {
   const handleClick = (interlocutorId, uid) => {
-    const chatId =
-      uid < interlocutorId
-        ? `${uid}${interlocutorId}`
-        : `${interlocutorId}${uid}`;
-    const chat = chats.find((chat) => chat.id === chatId);
-
     if (chat) {
       setCurrentChat({ chatId, interlocutorId });
     } else {
@@ -35,6 +29,12 @@ const Chat = ({
       setCurrentChat({ chatId, interlocutorId });
     }
   };
+
+  const chatId =
+    uid < interlocutorId
+      ? `${uid}${interlocutorId}`
+      : `${interlocutorId}${uid}`;
+  const chat = chats && chats.find((chat) => chat.id === chatId);
 
   return (
     <React.Fragment>
@@ -55,7 +55,7 @@ const Chat = ({
               >
                 {/* 10:25 */}
               </Typography>
-              {/* {" — Ziobro, przestań mi rodzinę prześladować…"} */}
+              {chat && chat.lastMsg}
             </React.Fragment>
           }
         />

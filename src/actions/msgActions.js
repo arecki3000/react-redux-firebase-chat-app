@@ -20,6 +20,12 @@ export const sendMessage = (message) => {
         authorId: authorId,
         date: new Date()
       })
+      .then((res) => {
+        return firestore.collection("chats").doc(message.currentChatId).update({
+          lastMsg: message.text.data
+        });
+      })
+      .then(() => console.log("updated"))
       .then(() => {
         dispatch({
           type: ADD_MSG
