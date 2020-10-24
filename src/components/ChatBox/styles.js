@@ -2,8 +2,10 @@ const styles = (theme) => ({
   root: {
     height: "100%",
     width: "100%",
+    display: (props) => (props.currentChatId ? "block" : "none"),
     [theme.breakpoints.up("tablet")]: {
-      maxWidth: "lg"
+      maxWidth: "lg",
+      display: (props) => "block"
     }
   },
   friendInfo: {

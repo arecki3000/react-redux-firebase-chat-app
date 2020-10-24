@@ -10,6 +10,7 @@ import Message from "./Message";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
+import { setCurrentChat } from "../../actions/msgActions";
 
 const ChatBox = ({
   classes,
@@ -17,7 +18,8 @@ const ChatBox = ({
   uid,
   currentChatId,
   users,
-  interlocutorId
+  interlocutorId,
+  setCurrentChat
 }) => {
   const dummyRef = useRef(null);
   const firstLoad = useRef(true);
@@ -37,10 +39,20 @@ const ChatBox = ({
     }
   }, [messages]);
 
+  const setCurrentChatToNull = () => {
+    const chatId = null;
+    const interlocutorId = null;
+
+    setCurrentChat({ chatId, interlocutorId });
+  };
+
   return (
-    <div className={classes.root}>
+    <div currentChatId={currentChatId} className={classes.root}>
       <div className={classes.friendInfo}>
-        <IconButton className={classes.arrowBack}>
+        <IconButton
+          onClick={() => setCurrentChatToNull()}
+          className={classes.arrowBack}
+        >
           <ArrowBackIcon />
         </IconButton>
         <Typography>{nick}</Typography>
@@ -80,8 +92,14 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCurrentChat: (chatId) => dispatch(setCurrentChat(chatId))
+  };
+};
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect((ownProps) => [
     {
       collection: "messages",

@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 
-const ChatList = ({ classes, signOut, users, uid }) => {
+const ChatList = ({ classes, signOut, users, uid, currentChatId }) => {
   const userWithoutAuthUser = users
     ? users.filter((user) => user.id !== uid)
     : [];
@@ -22,7 +22,7 @@ const ChatList = ({ classes, signOut, users, uid }) => {
   );
 
   return (
-    <div className={classes.root}>
+    <div currentChatId={currentChatId} className={classes.root}>
       <ChatFilter
         filter={filter}
         handleFilter={(e) => setFilter(e.target.value)}
@@ -49,8 +49,10 @@ const ChatList = ({ classes, signOut, users, uid }) => {
 const mapStateToProps = (state) => {
   const users = state.firestore.ordered.users;
   const uid = state.firebase.auth.uid;
+  const currentChatId = state.msg.currentChatId;
 
   return {
+    currentChatId,
     users,
     uid
   };

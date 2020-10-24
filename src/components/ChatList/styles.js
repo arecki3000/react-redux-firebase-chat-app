@@ -2,11 +2,11 @@ const styles = (theme) => ({
   root: {
     height: "100%",
     width: "100%",
-    display: "none",
+    display: (props) => (props.currentChatId ? "none" : "block"),
     borderRight: `1px solid ${theme.palette.divider}`,
     [theme.breakpoints.up("tablet")]: {
       width: "400px",
-      display: "block"
+      display: (props) => "block"
     }
   },
   filter: {
