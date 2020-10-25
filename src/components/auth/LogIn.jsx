@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Link as RouterLink, Redirect } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -78,6 +79,12 @@ const LogIn = ({ classes, signIn, uid }) => {
       </div>
     </Container>
   );
+};
+
+LogIn.propTypes = {
+  classes: PropTypes.object,
+  signIn: PropTypes.func,
+  uid: PropTypes.string
 };
 
 const mapStateToProps = (state) => {

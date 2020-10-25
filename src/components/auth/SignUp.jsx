@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
@@ -118,6 +119,11 @@ const SignUp = ({ classes, signUp, uid }) => {
       </div>
     </Container>
   );
+};
+
+SignUp.propTypes = {
+  signUp: PropTypes.func,
+  uid: PropTypes.string
 };
 
 const mapStateToProps = (state) => {

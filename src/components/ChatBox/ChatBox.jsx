@@ -47,7 +47,7 @@ const ChatBox = ({
   };
 
   return (
-    <div currentChatId={currentChatId} className={classes.root}>
+    <div currentchatid={currentChatId} className={classes.root}>
       <div className={classes.friendInfo}>
         <IconButton
           onClick={() => setCurrentChatToNull()}
