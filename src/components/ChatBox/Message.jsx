@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -40,6 +41,15 @@ const Message = ({ classes, my, data, author, time, users }) => {
       <ListItemText secondary={time ? moment(time.toDate()).calendar() : ""} />
     </ListItem>
   );
+};
+
+Message.propTypes = {
+  classes: PropTypes.object,
+  my: PropTypes.bool,
+  data: PropTypes.string,
+  author: PropTypes.string,
+  time: PropTypes.object,
+  users: PropTypes.array
 };
 
 const mapStateToProps = (state) => {

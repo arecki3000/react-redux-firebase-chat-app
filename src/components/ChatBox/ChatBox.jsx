@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
@@ -90,6 +91,16 @@ const mapStateToProps = (state) => {
     interlocutorId,
     users
   };
+};
+
+ChatBox.propTypes = {
+  classes: PropTypes.object,
+  messages: PropTypes.array,
+  uid: PropTypes.string,
+  currentChatId: PropTypes.string,
+  users: PropTypes.array,
+  interlocutorId: PropTypes.string,
+  setCurrentChat: PropTypes.func
 };
 
 const mapDispatchToProps = (dispatch) => {

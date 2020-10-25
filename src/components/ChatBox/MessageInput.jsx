@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import InputBase from "@material-ui/core/InputBase";
@@ -52,6 +53,12 @@ const MessageInput = ({ classes, sendMessage, currentChatId }) => {
       </IconButton>
     </form>
   );
+};
+
+MessageInput.propTypes = {
+  classes: PropTypes.object,
+  sendMessage: PropTypes.func,
+  currentChatId: PropTypes.string
 };
 
 const mapDispatchToProps = (dispatch) => {
