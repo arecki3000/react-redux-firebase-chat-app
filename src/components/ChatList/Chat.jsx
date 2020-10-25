@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -14,12 +15,10 @@ const Chat = ({
   classes,
   user,
   interlocutorId,
-  currentChatId,
   uid,
   chats,
   setCurrentChat,
-  createNewChat,
-  state
+  createNewChat
 }) => {
   const handleClick = (interlocutorId, uid) => {
     if (chat) {
@@ -63,6 +62,16 @@ const Chat = ({
       <Divider component="li" />
     </React.Fragment>
   );
+};
+
+Chat.propTypes = {
+  classes: PropTypes.object,
+  user: PropTypes.string,
+  interlocutorId: PropTypes.string,
+  uid: PropTypes.string,
+  chats: PropTypes.array,
+  setCurrentChat: PropTypes.func,
+  createNewChat: PropTypes.func
 };
 
 const mapStateToProps = (state) => {

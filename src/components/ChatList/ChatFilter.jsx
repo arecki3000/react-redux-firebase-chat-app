@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import InputBase from "@material-ui/core/InputBase";
@@ -21,6 +22,12 @@ const ChatFilter = ({ classes, filter, handleFilter }) => {
       />
     </div>
   );
+};
+
+ChatFilter.propTypes = {
+  classes: PropTypes.object,
+  filter: PropTypes.string,
+  handleFilter: PropTypes.func
 };
 
 export default withStyles(styles)(ChatFilter);

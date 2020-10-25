@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 import List from "@material-ui/core/List";
@@ -48,6 +49,14 @@ const ChatList = ({ classes, signOut, users, uid, currentChatId }) => {
   );
 };
 
+ChatList.propTypes = {
+  classes: PropTypes.object,
+  signOut: PropTypes.func,
+  users: PropTypes.array,
+  uid: PropTypes.string,
+  currentChatId: PropTypes.string
+};
+
 const mapStateToProps = (state) => {
   const users = state.firestore.ordered.users;
   const uid = state.firebase.auth.uid;
@@ -70,8 +79,8 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect((ownProps) => [
     {
-      collection: "users",
-      where: ["id", "!=", ownProps.uid]
+      collection: "users"
+      // where: ["id", "!=", ownProps.uid]
     }
   ]),
   withStyles(styles)

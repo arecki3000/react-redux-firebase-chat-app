@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import styles from "./styles";
@@ -22,6 +23,11 @@ const Dashboard = ({ classes, uid }) => {
       </Typography>
     </Container>
   );
+};
+
+Dashboard.propTypes = {
+  classes: PropTypes.object,
+  uid: PropTypes.string
 };
 
 const mapStateToProps = (state) => {
